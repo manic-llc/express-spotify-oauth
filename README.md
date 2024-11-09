@@ -1,6 +1,6 @@
 # @wearemanic/express-spotify-oauth
 
- Plug and play Spotify OAUTH flow for Express.
+Plug and play Spotify OAUTH flow for Express.
 
 ## Installation
 

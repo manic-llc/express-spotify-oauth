@@ -2,9 +2,9 @@ import qs from 'query-string';
 
 export default (app, config = {}) => {
   const SPOTIFY_ROOT = `https://accounts.spotify.com`;
-  const STATE_KEY_COOKIE = '@wearemanic/express-spotify-oauth:AUTH_ID';
-  const scopes = ['user-read-playback-state', 'user-read-private', 'user-read-email'];
-  const { clientId, clientSecret, redirectUrl, baseUrl, targetUrl } = {
+  const STATE_KEY_COOKIE = 'express-spotify-oauth-state';
+  const { clientId, clientSecret, redirectUrl, baseUrl, targetUrl, scopes } = {
+    scopes: ['user-read-playback-state', 'user-read-private', 'user-read-email'],
     baseUrl: '/api/spotify',
     targetUrl: '/',
     ...config,
@@ -25,10 +25,12 @@ export default (app, config = {}) => {
         client_id: clientId,
         redirect_uri: redirectUrl,
       });
+
       res.cookie(STATE_KEY_COOKIE, state);
       res.redirect(`https://accounts.spotify.com/authorize?${query}`);
     } catch (error) {
-      res.status(500).send(error);
+      console.log(error);
+      res.status(500).send({ error });
     }
   }
 
@@ -49,9 +51,11 @@ export default (app, config = {}) => {
       const data = await response.json();
       if (!response.ok) throw new Error('Spotify login unsuccessful.');
       const { access_token, refresh_token } = data;
-      const tokens = `accessToken=${access_token}&refreshToken=${refresh_token}`;
-      res.redirect(`${targetUrl}?${tokens}`);
+      res.cookie('spotify-access-token', access_token);
+      res.cookie('spotify-refresh-token', refresh_token);
+      res.redirect(`${targetUrl}`);
     } catch (error) {
+      console.log(error);
       res.status(500).send({ error });
     }
   }
@@ -79,6 +83,7 @@ export default (app, config = {}) => {
 
       res.status(200).send({ accessToken: body.access_token });
     } catch (error) {
+      console.log(error);
       res.status(500).send({ error });
     }
   }

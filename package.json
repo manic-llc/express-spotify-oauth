@@ -1,6 +1,7 @@
 {
   "name": "@wearemanic/express-spotify-oauth",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "type": "module",
   "description": "Plug and play Spotify OAUTH flow for Express.",
   "main": "index.js",
   "dependencies": {
