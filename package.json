@@ -1,0 +1,29 @@
+{
+  "name": "@wearemanic/express-spotify-oauth",
+  "version": "1.0.0",
+  "description": "Plug and play Spotify OAUTH flow for Express.",
+  "main": "index.js",
+  "dependencies": {
+    "query-string": "^9.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manic-llc/express-spotify-oauth.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "spotify",
+    "oauth"
+  ],
+  "author": "Zach Winter (zach@manic.llc)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manic-llc/express-spotify-oauth/issues"
+  },
+  "homepage": "https://github.com/manic-llc/express-spotify-oauth#readme"
+}
