@@ -1,4 +1,4 @@
-import { stringify } from 'query-string';
+import qs from 'query-string';
 
 export default (app, config = {}) => {
   const SPOTIFY_ROOT = `https://accounts.spotify.com`;
@@ -18,7 +18,7 @@ export default (app, config = {}) => {
   function initializeOauthFlow(req, res) {
     try {
       const state = Math.random().toString(36).slice(5, 11).toUpperCase();
-      const query = stringify({
+      const query = qs.stringify({
         response_type: 'code',
         scope: scopes.join(' '),
         state,
